@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:03:00 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/05/13 14:21:23 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:55:40 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	main(int argc, char *argv[])
 	{
 		if (handle_arg(argc, argv, philo))
 			return (1);
+		read_data(argc, argv, philo);
 		return (0);
 	}
 	else

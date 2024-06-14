@@ -6,11 +6,19 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:19:59 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/05/13 17:06:57 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/14 19:54:41 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
+
+long	get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
 
 int	handle_data(t_philo *data)
 {
@@ -23,13 +31,36 @@ int	handle_data(t_philo *data)
 
 void	read_data(int argc, char *argv[], t_philo *philo)
 {
+	long start_time, end_time;
+
+	start_time = get_time();
 	philo->action.num_philo = ft_atoi(argv[1]);
 	philo->action.fork = ft_atoi(argv[1]);
+	end_time = get_time();
+	printf("Time taken for action [num_philo] and [fork]: %ld\n", end_time - start_time);
+
+	start_time = get_time();
 	philo->action.time_eat = ft_atoi(argv[2]);
+	end_time = get_time();
+	printf("Time taken for action [time_eat]: %ld\n", end_time - start_time);
+
+	start_time = get_time();
 	philo->action.time_die = ft_atoi(argv[3]);
+	end_time = get_time();
+	printf("Time taken for action [time_die]: %ld\n", end_time - start_time);
+	
+	start_time = get_time();
 	philo->action.time_sleep = ft_atoi(argv[4]);
+	end_time = get_time();
+	printf("Time taken for action [time_sleep]: %ld\n", end_time - start_time);
+	
 	if (argc == 6)
-		philo->action.time_eat = ft_atoi(argv[5]);
+	{
+		start_time = get_time();
+		philo->action.time_eat = atoi(argv[5]);
+		end_time = get_time();
+		printf("Time taken for action (MUST) - [time_eat]: %ld\n", end_time - start_time);
+	}
 	else
 		philo->action.time_eat = -1;
 }
