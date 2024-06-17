@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/17 14:42:59 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/17 19:34:22 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ typedef struct s_data
 }				t_data;
 
 
+/************************
+ * PATH: SRCS/ALGORITHM *
+ ************************/
+
+/** File: routine.c */
+void	*routine(void *add);
+
+/** File: init_data.c */
+void	init_data(t_philo *philo, t_data *data);
+
 /*********************
  * PATH: SRCS/HANDLE *
  *********************/
@@ -63,6 +73,14 @@ int		handle_arg(int argc, char *argv[], t_philo *philo);
 /********************
  * PATH: SRCS/UTILS *
  ********************/
+
+/** File: is_dead.c */
+
+/** File: is_eat.c */
+
+/** File: is_think.c */
+
+/** File: is_sleep.c */
 
 /** File: utils_libft.c */
 int		ft_atoi(const char *str);
