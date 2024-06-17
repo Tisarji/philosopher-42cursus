@@ -25,7 +25,7 @@ UTILS_SRC =			utils.c
 ERRORHANDLE_SRCS = $(addprefix $(SRC_PATH)/handle/, $(ERRORHANDLE_SRC))
 UTILS_SRCS = $(addprefix $(SRC_PATH)/utils/, $(UTILS_SRC))
 
-SRCS = $(PATH_SRCS)/main.c $(ERRORHANDLE_SRCS) $(UTILS_SRCS)
+SRCS = $(PATH_SRCS)/philosopher.c $(ERRORHANDLE_SRCS) $(UTILS_SRCS)
 OBJS = $(SRCS:$(SRC_PATH)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

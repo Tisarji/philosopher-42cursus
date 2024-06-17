@@ -6,19 +6,11 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:19:59 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/14 19:54:41 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:22:06 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
-
-long	get_time(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
-}
 
 int	handle_data(t_philo *data)
 {
