@@ -18,14 +18,20 @@ PATH_ERRORHANDLE = srcs/handle
 
 OBJ_DIR = objs
 
+ALGORITHM_SRC =		init_philo.c	\
+					monitor.c		\
+					routine.c
+
 ERRORHANDLE_SRC =	handle_input.c
 
-UTILS_SRC =			utils.c
+UTILS_SRC =			utils_libft.c	\
+					utils_philo.c
 
+ALGORITHM_SRCS =	$(addprefix $(SRC_PATH)/algorithm/, $(ALGORITHM_SRC))
 ERRORHANDLE_SRCS = $(addprefix $(SRC_PATH)/handle/, $(ERRORHANDLE_SRC))
 UTILS_SRCS = $(addprefix $(SRC_PATH)/utils/, $(UTILS_SRC))
 
-SRCS = $(PATH_SRCS)/philosopher.c $(ERRORHANDLE_SRCS) $(UTILS_SRCS)
+SRCS = $(PATH_SRCS)/philosopher.c $(ERRORHANDLE_SRCS) $(UTILS_SRCS) $(ALGORITHM_SRCS)
 OBJS = $(SRCS:$(SRC_PATH)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(NAME)

@@ -6,29 +6,37 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:03:00 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/17 14:57:02 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/20 17:45:34 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosopher.h"
 
+void	join_thread(t_data *data)
+{
+	int	i;
+
+	i = -1;
+	while (++i < data->num_philo)
+		pthread_join(data->philo[i].thread, NULL);
+}
+
 int	main(int argc, char *argv[])
 {
-	t_philo	*philo = NULL;
+	t_data	data;
+	int		i;
 
-	if (argc == 5 || argc == 6)
+	if (handle_arg(argc, argv, &data))
+		return (1);
+	init_philo(&data);
+	init_fork(&data);
+	i = -1;
+	while (++i < data.num_philo)
 	{
-		if (handle_arg(argc, argv, philo))
-			return (1);
-		read_data(argc, argv, philo);
-		return (0);
+		if (pthread_create(&data.philo[i].thread, NULL, &routine, &data.philo[i]))
+			return (ft_exit(&data), 1);
 	}
-	else
-	{
-		if (argc < 5)
-			ft_error("Error: Nedd More Argument", 0);
-		else if (argc > 6)
-			ft_error("Error: Too Much Argument", 0);
-	}
-	return (0);
+	ph_sleep(&data, 10);
+	monitor(&data);
+	join_thread(&data);
 }

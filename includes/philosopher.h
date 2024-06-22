@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/17 19:34:22 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/20 16:41:56 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,70 +24,78 @@
 # include <pthread.h>
 # include <sys/time.h>
 
-typedef struct s_philo
-{
-	int				num_philos;
-	int				num_forks;
-	long long		t_die;
-	long long		t_eat;
-	long long		t_sleep;
-	int				times_eat;
-	pthread_mutex_t	*forks_mtx;
-	pthread_mutex_t	death_mtx;
-	long long		start_time;
-	pthread_t		death_thr;
-	int				all_eat;
-}				t_philo;
-
 typedef struct s_data
 {
-	t_philo		*philo_info;
-	int			id;
-	pthread_t	philo_thr;
-	long long	state_time;
-	long long	last_meal;
-	int			times_eaten;
-	long long	death_time;
+	pthread_mutex_t		*fork;
+	pthread_mutex_t		print;
+	pthread_mutex_t		monitor;
+	pthread_mutex_t		eat;
+	int					dead;
+	int					num_philo;
+	int					time_eat;
+	int					time_die;
+	int					time_sleep;
+	time_t				time_start;
+	int					time_must_eat;
+	int					eat_verify; /** atomic_int suggest by chatGPT */
+	struct s_philo		*philo;
 }				t_data;
 
+typedef struct s_philo
+{
+	pthread_t		thread;
+	int				id;
+	long			last_spaghetti; /** atomic_long suggest by chatGPT */
+	int				left_fork;
+	int				right_fork;
+	int				num_eat;
+	t_data			*data;
+}				t_philo;
+
+enum	e_state
+{
+	FORK,
+	EAT,
+	THINK,
+	SLEEP,
+	DEAD
+};
 
 /************************
  * PATH: SRCS/ALGORITHM *
  ************************/
 
+/** File: Monitor.c */
+void	monitor(t_data *data);
+
 /** File: routine.c */
 void	*routine(void *add);
-
+void	is_eat(t_philo *philo, int id);
 /** File: init_data.c */
-void	init_data(t_philo *philo, t_data *data);
+void	is_eat(t_philo *philo, int id);
+void	init_fork(t_data *data);
+int		init_philo(t_data *data);
 
 /*********************
  * PATH: SRCS/HANDLE *
  *********************/
 
 /** File: handle_input.c */
-int		handle_data(t_philo *data);
-void	read_data(int argc, char *argv[], t_philo *philo);
-int		handle_arg(int argc, char *argv[], t_philo *philo);
+int	valid_arg(int argc, char *argv[]);
+int	handle_arg(int argc, char *argv[], t_data *data);
 
 /********************
  * PATH: SRCS/UTILS *
  ********************/
-
-/** File: is_dead.c */
-
-/** File: is_eat.c */
-
-/** File: is_think.c */
-
-/** File: is_sleep.c */
 
 /** File: utils_libft.c */
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 
 /** File: utils_philo.c */
-void	ft_error(char *str, int status);
-size_t	get_time(void);
+void	ft_exit(t_data *data);
+void	ph_print(int id, t_data *data, int mode);
+void	ph_sleep(t_data *data, time_t finish);
+time_t	get_curr_time(t_data *data);
 
 #endif

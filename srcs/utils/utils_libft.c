@@ -6,11 +6,21 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:31:45 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/17 14:56:39 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/06/17 20:26:56 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
+
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
 
 int	ft_atoi(const char *str)
 {
