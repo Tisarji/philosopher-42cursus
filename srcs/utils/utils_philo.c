@@ -6,13 +6,13 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/20 09:32:07 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:59:05 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
 
-void	ft_exit(t_data *data)
+void	ph_exit(t_data *data)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void	ft_exit(t_data *data)
 			pthread_mutex_destroy(&data->monitor);
 			pthread_mutex_destroy(&data->eat);
 		}
-		if (&data->fork[i])
+		if (data->fork)
 			pthread_mutex_destroy(&data->fork[i]);
 		i++;
 	}
@@ -49,14 +49,14 @@ void	ph_print(int id, t_data *data, int mode)
 	{
 		if (data->philo[id].num_eat == data->time_must_eat)
 			data->eat_verify++;
-		printf("%lu %d is eating\n", get_curr_time(data), id);
+		printf("%s %lu %d is eating%s\n", GREEN, get_curr_time(data), id, RESET);
 	}
 	if (mode == FORK && !data->dead)
-		printf("%lu %d has taken a fork\n", get_curr_time(data), id);
+		printf("%s %lu %d has taken a fork%s\n", YELLOW, get_curr_time(data), id, RESET);
 	if (mode == SLEEP && !data->dead)
-		printf("%lu %d is sleeping\n", get_curr_time(data), id);
+		printf("%s %lu %d is sleeping%s\n", CYAN, get_curr_time(data), id, RESET);
 	if (mode == THINK && !data->dead)
-		printf("%lu %d is thinking\n", get_curr_time(data), id);
+		printf("%s %lu %d is thinking%s\n", WHITE, get_curr_time(data), id, RESET);
 	pthread_mutex_unlock(&data->print);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:03:00 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/20 17:45:34 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/07/07 15:27:57 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	main(int argc, char *argv[])
 	while (++i < data.num_philo)
 	{
 		if (pthread_create(&data.philo[i].thread, NULL, &routine, &data.philo[i]))
-			return (ft_exit(&data), 1);
+			return (ph_exit(&data), 1);
 	}
 	ph_sleep(&data, 10);
 	monitor(&data);

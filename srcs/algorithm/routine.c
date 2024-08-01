@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 19:09:40 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/22 10:57:47 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/07/08 12:48:50 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,6 @@
 
 void	*routine(void *add)
 {
-	/** Consept:
-	 *
-	 * Made: function for each philosopher;
-	 * 
-	 * Take fork;
-	 * Eat;
-	 * Sleep;
-	 * Think;
-	 * Lock -> Fork -> Philo_id -> M_Dead;
-	 * Repeat;
-	 * Unlock -> Fork -> Philo_id -> M_Dead;
-	 * 
-	 */
-
 	t_data	*data;
 	t_philo	*philo;
 

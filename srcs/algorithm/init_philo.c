@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:11:30 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/20 16:41:44 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/07/28 13:40:18 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	is_eat(t_philo *philo, int id)
 	if (data->num_philo == 1)
 	{
 		ph_sleep(data, data->time_die);
-		printf("%lu %d %s died %s\n", get_curr_time(data), id, RED, RESET);
+		printf("%s %lu %d died %s\n", RED, get_curr_time(data), id, RESET);
 		data->dead = 1;
 		pthread_mutex_unlock(&data->fork[philo->left_fork]);
 		return ;
@@ -45,11 +45,11 @@ void	init_fork(t_data *data)
 	while (++i < data->num_philo)
 		pthread_mutex_init(&data->fork[i], NULL);
 	if (pthread_mutex_init(&(data->print), NULL) != 0)
-		return (ft_exit(data));
+		return (ph_exit(data));
 	if (pthread_mutex_init(&(data->monitor), NULL) != 0)
-		return (ft_exit(data));
+		return (ph_exit(data));
 	if (pthread_mutex_init(&(data->eat), NULL) != 0)
-		return (ft_exit(data));
+		return (ph_exit(data));
 	data->dead = 0;
 }
 
@@ -66,7 +66,7 @@ int	init_philo(t_data *data)
 		data->philo[i].num_eat = 0;
 		data->philo[i].left_fork = i;
 		if (data->num_philo > 1)
-			data->philo[i].right_fork = i + 1; /** (i + 1) % data->num_philo */
+			data->philo[i].right_fork = ((i + 1) % data->num_philo);
 		data->philo[i].data = data;
 	}
 	data->time_start = get_curr_time(data);

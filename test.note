@@ -1,0 +1,19 @@
+
+"No philosopher should die."
+./philosopher 5 800 200 200
+
+" No philosopher should die and the simulation should stop when
+every philosopher has eaten at least 7 times."
+./philosopher 5 800 200 200 7
+
+"No philosopher should die."
+./philosopher 4 410 200 200
+
+"One philosopher should die"
+./philosopher 4 310 200 100
+
+"a philo should die"
+./philosopher 4 310 200 100
+
+"a philo should die"
+./philosopher 4 310 200 100

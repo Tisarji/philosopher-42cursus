@@ -10,7 +10,9 @@ NAME = philosopher
 RM = rm -rf
 
 PATH_HEADER = includes
-CFLAGS = -Wall -Wextra -Werror -I $(PATH_HEADER)
+CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
+# CFLAGS = -pthread -g -fsanitize=thread -I $(PATH_HEADER)
+
 PATH_SRCS = srcs
 
 PATH_ALGORITHM = srcs/algorithm
@@ -56,4 +58,20 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+run: $(NAME)
+#	@./$(NAME) 1 800 200 200
+#	@./$(NAME) 5 800 200 200
+	@./$(NAME) 5 800 200 200 7
+#	@./$(NAME) 5 800 200 200 7 | grep 'is eating'
+#	@./$(NAME) 4 410 200 200
+#	@./$(NAME) 4 310 200 100
+#	@./$(NAME) 2 310 200 100
+
+#	@./$(NAME) 3 8100 2000 2000 2
+#	@./$(NAME) 2 4100 2000 2000 2
+#	@./$(NAME) 4 410 200 200 5
+#	@./$(NAME) 4 410 200 200
+#	@./$(NAME) 2 800 200 200 2
+#	@./$(NAME) 2 60 60 60
+
+.PHONY: all clean fclean re run

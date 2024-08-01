@@ -6,16 +6,19 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/06/20 16:41:56 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/07/18 18:47:53 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
-# define GREEN "\033[0;32m"
-# define RED "\033[0;31m"
-# define WHITE "\033[0;37m"
+# define GREEN "\e[0;32m"
+# define RED "\e[0;31m"
+# define WHITE "\e[0;37m"
+# define YELLOW "\e[0;33m"
+# define CYAN "\e[0;36m"
+# define PURPLE "\e[0;35m"
 # define RESET "\033[0m"
 
 # include <unistd.h>
@@ -23,6 +26,7 @@
 # include <stdio.h>
 # include <pthread.h>
 # include <sys/time.h>
+# include <stdbool.h>
 
 typedef struct s_data
 {
@@ -37,7 +41,7 @@ typedef struct s_data
 	int					time_sleep;
 	time_t				time_start;
 	int					time_must_eat;
-	int					eat_verify; /** atomic_int suggest by chatGPT */
+	int					eat_verify;
 	struct s_philo		*philo;
 }				t_data;
 
@@ -45,7 +49,7 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	int				id;
-	long			last_spaghetti; /** atomic_long suggest by chatGPT */
+	long			last_spaghetti;
 	int				left_fork;
 	int				right_fork;
 	int				num_eat;
@@ -81,8 +85,8 @@ int		init_philo(t_data *data);
  *********************/
 
 /** File: handle_input.c */
-int	valid_arg(int argc, char *argv[]);
-int	handle_arg(int argc, char *argv[], t_data *data);
+int		valid_arg(int argc, char *argv[]);
+int		handle_arg(int argc, char *argv[], t_data *data);
 
 /********************
  * PATH: SRCS/UTILS *
@@ -93,7 +97,7 @@ int		ft_atoi(const char *str);
 int		ft_isdigit(int c);
 
 /** File: utils_philo.c */
-void	ft_exit(t_data *data);
+void	ph_exit(t_data *data);
 void	ph_print(int id, t_data *data, int mode);
 void	ph_sleep(t_data *data, time_t finish);
 time_t	get_curr_time(t_data *data);
