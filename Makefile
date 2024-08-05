@@ -5,7 +5,7 @@ COLOR_RED = \033[91m
 COLOR_GREEN = \033[92m
 COLOR_PINK = \033[95m
 
-NAME = philosopher
+NAME = philo
 
 RM = rm -rf
 
@@ -21,7 +21,6 @@ PATH_ERRORHANDLE = srcs/handle
 OBJ_DIR = objs
 
 ALGORITHM_SRC =		init_philo.c	\
-					monitor.c		\
 					routine.c
 
 ERRORHANDLE_SRC =	handle_input.c
@@ -41,7 +40,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 	@echo "[$(COLOR_YELLOW)$(NAME) --> OK$(COLOR_RESET)]\n ${COLOR_GREEN}Success!${COLOR_RESET}"
-	@echo "$(COLOR_PINK)\tUsage: ./philosopher [Argument 5 - 6]$(COLOR_RESET)"
+	@echo "$(COLOR_PINK)\tUsage: ./philo [Argument 5 - 6]$(COLOR_RESET)"
 
 $(OBJ_DIR)/%.o: $(PATH_SRCS)/%.c
 	@mkdir -p $(dir $@)
@@ -59,9 +58,9 @@ fclean: clean
 re: fclean all
 
 run: $(NAME)
+	@./$(NAME) 5 900 295 60 10
 #	@./$(NAME) 1 800 200 200
 #	@./$(NAME) 5 800 200 200
-	@./$(NAME) 5 800 200 200 7
 #	@./$(NAME) 5 800 200 200 7 | grep 'is eating'
 #	@./$(NAME) 4 410 200 200
 #	@./$(NAME) 4 310 200 100

@@ -6,78 +6,93 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/07/18 18:59:05 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/05 20:46:43 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
 
-void	ph_exit(t_data *data)
+void	ph_exit(t_table *table, pthread_t *thread)
 {
 	int	i;
 
 	i = 0;
-	while (i < data->num_philo)
-	{
-		if (i == 0)
-		{
-			pthread_mutex_destroy(&data->print);
-			pthread_mutex_destroy(&data->monitor);
-			pthread_mutex_destroy(&data->eat);
-		}
-		if (data->fork)
-			pthread_mutex_destroy(&data->fork[i]);
-		i++;
-	}
-	if (data->fork)
-		free(data->fork);
-	if (data->fork)
-		free(data->philo);
+	while (i++ < table->num_philo)
+		pthread_join(thread[i], NULL);
+	i = 0;
+	while (i++ < table->num_philo)
+		pthread_mutex_destroy(&table->philo[i].fork);
+	pthread_mutex_destroy(&table->is_print);
+	pthread_mutex_destroy(&table->is_check);
+	free(table->philo);
+	free(thread);
 }
 
-
-void	ph_print(int id, t_data *data, int mode)
-{
-	if (mode == EAT)
-	{
-		pthread_mutex_lock(&data->eat);
-		data->philo[id].last_spaghetti = get_curr_time(data);
-		pthread_mutex_unlock(&data->eat);
-	}
-	pthread_mutex_lock(&data->print);
-	if (mode == EAT && !data->dead)
-	{
-		if (data->philo[id].num_eat == data->time_must_eat)
-			data->eat_verify++;
-		printf("%s %lu %d is eating%s\n", GREEN, get_curr_time(data), id, RESET);
-	}
-	if (mode == FORK && !data->dead)
-		printf("%s %lu %d has taken a fork%s\n", YELLOW, get_curr_time(data), id, RESET);
-	if (mode == SLEEP && !data->dead)
-		printf("%s %lu %d is sleeping%s\n", CYAN, get_curr_time(data), id, RESET);
-	if (mode == THINK && !data->dead)
-		printf("%s %lu %d is thinking%s\n", WHITE, get_curr_time(data), id, RESET);
-	pthread_mutex_unlock(&data->print);
-}
-
-void	ph_sleep(t_data *data, time_t finish)
-{
-	time_t	start;
-
-	start = get_curr_time(data) + finish;
-	while (data->dead != 1)
-	{
-		if (get_curr_time(data) >= start)
-			break ;
-		usleep(200);
-	}
-}
-
-time_t	get_curr_time(t_data *data)
+size_t	get_curr_time(void)
 {
 	struct timeval	time;
 
-	if (gettimeofday(&time, NULL) == 1)
-		return (1);
-	return (((time.tv_sec * 1000) + (time.tv_usec / 1000)) - data->time_start);
+	gettimeofday(&time, NULL);
+	return (((time.tv_sec * 1000) + (time.tv_usec / 1000)));
+}
+
+void	ph_usleep(t_table *table, size_t time_sleep)
+{
+	size_t	time;
+
+	time = get_curr_time();
+	while (!(table->die))
+	{
+		if (get_curr_time() - time >= time_sleep)
+			break ;
+		usleep(100);
+	}
+}
+
+static char *ph_color_massage(int msg)
+{
+	if (msg == FORK)
+		return (YELLOW);
+	if (msg == EAT)
+		return (GREEN);
+	if (msg == SLEEP)
+		return (CYAN);
+	if (msg == THINK)
+		return (GREEN);
+	if (msg == DEAD)
+		return (RED);
+	return ("Error: Valid");
+}
+
+static char *ph_massage(int msg)
+{
+	if (msg == FORK)
+		return ("has taken a fork");
+	if (msg == EAT)
+		return ("is eating");
+	if (msg == SLEEP)
+		return ("is sleeping");
+	if (msg == THINK)
+		return ("is thinking");
+	if (msg == DEAD)
+		return ("died");
+	return ("Error: Valid");
+}
+
+void	ph_print(t_philo *philo, int msg)
+{
+	size_t	time;
+
+	time = get_curr_time() - philo->table->table_init;
+	pthread_mutex_lock(&philo->table->is_print);
+	if (!philo->table->die && !philo->table->eat_all)
+	{
+		printf(GREEN"%6ld ms", time);
+		printf(CYAN" %3d ", philo->id);
+		printf("%s%s", ph_color_massage(msg), ph_massage(msg));
+		if (msg == EAT)
+			printf(" #%d", philo->meal_eat);
+		printf("\n");
+	}
+	pthread_mutex_unlock(&philo->table->is_print);
 }

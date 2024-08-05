@@ -2,3 +2,5 @@
 .vscode
 *.o
 philosopher
+philo.dSYM
+test.note

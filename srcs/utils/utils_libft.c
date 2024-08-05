@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 14:31:45 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/07/07 22:17:27 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/05 20:18:46 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,13 @@ size_t	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
 }
 
 int	ft_atoi(const char *str)
@@ -43,9 +50,15 @@ int	ft_atoi(const char *str)
 	return (nb * sign);
 }
 
-int	ft_isdigit(int c)
+int	ft_strncmp(const char *str1, const char *str2, size_t num)
 {
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (str1[i] && str2[i] && str1[i] == str2[i] && i < num)
+		i++;
+	if (i < num)
+		return ((unsigned char)str1[i] - (unsigned char)str2[i]);
+	else
+		return (0);
 }
