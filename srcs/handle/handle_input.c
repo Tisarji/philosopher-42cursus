@@ -6,35 +6,11 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:19:59 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/06 12:22:03 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/07 12:07:32 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
-
-static int	check_valid(int argc, char *argv[])
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (++i < argc)
-	{
-		j = -1;
-		if (argv[i][0] == '-')
-			return (1);
-		else if (argv[i][0] == '+')
-			j++;
-		if (!ft_isdigit(argv[i][j + 1]))
-			return (1);
-		while (argv[i][++j])
-		{
-			if (!ft_isdigit(argv[i][j]))
-				return (1);
-		}
-	}
-	return (0);
-}
 
 static void	init_table(t_table *table)
 {
@@ -61,6 +37,30 @@ static void	init_table(t_table *table)
 	}
 	pthread_mutex_init(&table->is_print, NULL);
 	pthread_mutex_init(&table->is_check, NULL);
+}
+
+static int	check_valid(int argc, char *argv[])
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (++i < argc)
+	{
+		j = -1;
+		if (argv[i][0] == '-')
+			return (1);
+		else if (argv[i][0] == '+')
+			j++;
+		if (!ft_isdigit(argv[i][j + 1]))
+			return (1);
+		while (argv[i][++j])
+		{
+			if (!ft_isdigit(argv[i][j]))
+				return (1);
+		}
+	}
+	return (0);
 }
 
 static int	is_int(char *s)

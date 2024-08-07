@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/06 16:35:15 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/07 14:35:07 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ph_print(t_philo *philo, int msg)
 	{
 		// printf(GREEN"%6ld ms", time);
 		printf(CYAN" %3d ", philo->id);
-		printf("%s%s", ph_color_massage(msg), ph_massage(msg));
+		printf("%s%s%s", ph_color_massage(msg), ph_massage(msg), RESET);
 		if (msg == EAT)
 			printf(" #%d", philo->meal_eat);
 		printf("\n");

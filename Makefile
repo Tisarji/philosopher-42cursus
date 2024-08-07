@@ -10,8 +10,8 @@ NAME = philo
 RM = rm -rf
 
 PATH_HEADER = includes
-CFLAGS = -Wall -Werror -Wextra -pthread -g -I $(PATH_HEADER)
-# CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
+# CFLAGS = -Wall -Werror -Wextra -pthread -g -I $(PATH_HEADER)
+CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
 # CFLAGS = -pthread -g -fsanitize=thread -I $(PATH_HEADER)
 
 PATH_SRCS = srcs
