@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/05 20:46:43 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/06 16:35:15 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,11 @@ void	ph_exit(t_table *table, pthread_t *thread)
 {
 	int	i;
 
-	i = 0;
-	while (i++ < table->num_philo)
+	i = -1;
+	while (++i < table->num_philo)
 		pthread_join(thread[i], NULL);
-	i = 0;
-	while (i++ < table->num_philo)
+	i = -1;
+	while (++i < table->num_philo)
 		pthread_mutex_destroy(&table->philo[i].fork);
 	pthread_mutex_destroy(&table->is_print);
 	pthread_mutex_destroy(&table->is_check);
@@ -58,7 +58,7 @@ static char *ph_color_massage(int msg)
 	if (msg == SLEEP)
 		return (CYAN);
 	if (msg == THINK)
-		return (GREEN);
+		return (PURPLE);
 	if (msg == DEAD)
 		return (RED);
 	return ("Error: Valid");
@@ -81,13 +81,13 @@ static char *ph_massage(int msg)
 
 void	ph_print(t_philo *philo, int msg)
 {
-	size_t	time;
+	// size_t	time;
 
-	time = get_curr_time() - philo->table->table_init;
+	// time = get_curr_time() - philo->table->table_init;
 	pthread_mutex_lock(&philo->table->is_print);
 	if (!philo->table->die && !philo->table->eat_all)
 	{
-		printf(GREEN"%6ld ms", time);
+		// printf(GREEN"%6ld ms", time);
 		printf(CYAN" %3d ", philo->id);
 		printf("%s%s", ph_color_massage(msg), ph_massage(msg));
 		if (msg == EAT)

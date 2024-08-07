@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:11:30 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/05 20:27:14 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:01:46 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ void	is_die(t_table *table)
 
 	while (!table->eat_all)
 	{
-		i = 0;
-		while (!table->die && i++ < table->num_philo)
+		i = -1;
+		while (!table->die && ++i < table->num_philo)
 		{
 			pthread_mutex_lock(&table->is_check);
-			if (get_curr_time() - table->philo[i].last_eat > (size_t)table->die)
+			if (get_curr_time() - table->philo[i].last_eat > (size_t)table->time_die)
 			{
 				ph_print(&table->philo[i], DEAD);
 				table->die = 1;
@@ -60,7 +60,7 @@ void	is_die(t_table *table)
 		if (table->die)
 			break ;
 		i = 0;
-		while (table->num_eat != 1 && i < table->num_philo && \
+		while (table->num_eat != -1 && i < table->num_philo && \
 			table->philo[i].meal_eat >= table->num_eat)
 			i++;
 		if (i == table->num_philo)

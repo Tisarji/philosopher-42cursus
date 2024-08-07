@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:19:59 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/05 20:18:25 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/06 12:22:03 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	check_valid(int argc, char *argv[])
 			j++;
 		if (!ft_isdigit(argv[i][j + 1]))
 			return (1);
-		while (argv[i][j++])
+		while (argv[i][++j])
 		{
 			if (!ft_isdigit(argv[i][j]))
 				return (1);
@@ -43,8 +43,8 @@ static void	init_table(t_table *table)
 	table->die = 0;
 	table->eat_all = 0;
 	table->philo = (t_philo *)malloc(table->num_philo * sizeof(t_philo));
-	i = 0;
-	while (i++ < table->num_philo)
+	i = -1;
+	while (++i < table->num_philo)
 	{
 		table->philo[i].id = i + 1;
 		table->philo[i].table = table;
@@ -88,7 +88,7 @@ static int	check_arg(int argc, char *argv[])
 	if (check_valid(argc, argv))
 		return (1);
 	i = 0;
-	while (i++ < argc)
+	while (++i < argc)
 	{
 		if (is_int(argv[i]))
 			return (1);

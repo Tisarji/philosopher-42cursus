@@ -1,7 +1,7 @@
 COLOR_RESET = \033[0m
 COLOR_YELLOW = \033[1;33m
 COLOR_CYAN = \033[1;36m
-COLOR_RED = \033[91m
+COLOR_RED = \033[1;91m
 COLOR_GREEN = \033[92m
 COLOR_PINK = \033[95m
 
@@ -10,7 +10,8 @@ NAME = philo
 RM = rm -rf
 
 PATH_HEADER = includes
-CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
+CFLAGS = -Wall -Werror -Wextra -pthread -g -I $(PATH_HEADER)
+# CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
 # CFLAGS = -pthread -g -fsanitize=thread -I $(PATH_HEADER)
 
 PATH_SRCS = srcs
@@ -54,6 +55,7 @@ clean:
 fclean: clean
 	@$(RM) $(NAME)
 	@echo "$(COLOR_RED)Cleaned up executables$(COLOR_RESET)"
+	@echo "$(COLOR_RED)Delete Programe$(COLOR_RESET)"
 
 re: fclean all
 

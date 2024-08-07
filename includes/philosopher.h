@@ -6,20 +6,20 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/05 20:16:59 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/06 15:41:16 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
-# define GREEN "\e[0;32m"
-# define RED "\e[0;31m"
-# define WHITE "\e[0;37m"
-# define YELLOW "\e[0;33m"
-# define CYAN "\e[0;36m"
-# define PURPLE "\e[0;35m"
-# define RESET "\033[0m"
+#define GREEN "\e[1;32m"
+#define RED "\e[1;31m"
+#define WHITE "\e[1;37m"
+#define YELLOW "\e[1;33m"
+#define CYAN "\e[1;36m"
+#define PURPLE "\e[1;35m"
+#define RESET "\033[0m"
 
 # include <unistd.h>
 # include <stdlib.h>
