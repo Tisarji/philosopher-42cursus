@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/07 14:35:07 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/08 16:15:33 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,17 +81,16 @@ static char *ph_massage(int msg)
 
 void	ph_print(t_philo *philo, int msg)
 {
-	// size_t	time;
-
-	// time = get_curr_time() - philo->table->table_init;
+	size_t	time;
+	time = get_curr_time() - philo->table->table_init;
 	pthread_mutex_lock(&philo->table->is_print);
 	if (!philo->table->die && !philo->table->eat_all)
 	{
-		// printf(GREEN"%6ld ms", time);
+		printf(BLACK"%6ld ms", time);
 		printf(CYAN" %3d ", philo->id);
 		printf("%s%s%s", ph_color_massage(msg), ph_massage(msg), RESET);
 		if (msg == EAT)
-			printf(" #%d", philo->meal_eat);
+			printf("%s - %d%s", GREEN, philo->meal_eat, RESET);
 		printf("\n");
 	}
 	pthread_mutex_unlock(&philo->table->is_print);

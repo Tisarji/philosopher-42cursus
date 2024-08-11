@@ -6,13 +6,14 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/07 14:13:54 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:07:09 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHER_H
 # define PHILOSOPHER_H
 
+# define BLACK "\e[1;30m"
 # define GREEN "\e[1;32m"
 # define RED "\e[1;31m"
 # define WHITE "\e[1;37m"
