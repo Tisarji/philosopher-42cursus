@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/07 15:07:09 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/11 20:37:51 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_table
 	pthread_mutex_t	is_check;
 }	t_table;
 
-
 /************************
  * PATH: SRCS/ALGORITHM *
  ************************/
@@ -103,5 +102,10 @@ void	ph_exit(t_table *table, pthread_t *thread);
 size_t	get_curr_time(void);
 void	ph_usleep(t_table *table, size_t time_sleep);
 void	ph_print(t_philo *philo, int msg);
+
+/** File: utils_setup.c */
+void	ph_setlock_die(t_table *table ,int *die, pthread_mutex_t *mutex);
+void	ph_setlock_eat(t_table *table ,int *eat, pthread_mutex_t *mutex);
+void	ph_setunlock(pthread_mutex_t *mutex);
 
 #endif
