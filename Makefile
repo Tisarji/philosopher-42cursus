@@ -27,8 +27,7 @@ ALGORITHM_SRC =		init_philo.c	\
 ERRORHANDLE_SRC =	handle_input.c
 
 UTILS_SRC =			utils_libft.c	\
-					utils_philo.c	\
-					utils_setup.c
+					utils_philo.c
 
 ALGORITHM_SRCS =	$(addprefix $(SRC_PATH)/algorithm/, $(ALGORITHM_SRC))
 ERRORHANDLE_SRCS = $(addprefix $(SRC_PATH)/handle/, $(ERRORHANDLE_SRC))
