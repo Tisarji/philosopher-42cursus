@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/11 20:37:51 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/28 04:15:30 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,27 +41,33 @@ enum	e_state
 typedef struct s_philo
 {
 	int				id;
-	int				meal_eat;
-	size_t			last_eat;
-	pthread_mutex_t	fork;
-	struct s_philo	*r_fork;
-	struct s_philo	*l_fork;
+	int				nb_eat_philo;
+	int				left_fork_id;
+	int				right_fork_id;
+	time_t			last_eat;
+	pthread_t		thread_id;
 	struct s_table	*table;
 }	t_philo;
 
 typedef struct s_table
 {
-	int				time_die;
-	int				time_eat;
-	int				time_sleep;
-	int				num_eat;
 	int				num_philo;
-	int				eat_all;
-	int				die;
-	size_t			table_init;
-	t_philo			*philo;
+	time_t			time_die;
+	time_t			time_eat;
+	time_t			time_sleep;
+	time_t			time_start;
+	int				num_eat;
+	int				all_eat;
+	bool			die;
+	pthread_mutex_t	die_mutex;
+	pthread_mutex_t	*fork;
+	pthread_mutex_t	checker_eat;
+	pthread_mutex_t	time_die_mutex;
+	pthread_mutex_t	all_eat_mutex;
+	pthread_mutex_t	num_eat_mutex;
 	pthread_mutex_t	is_print;
 	pthread_mutex_t	is_check;
+	t_philo			*philo;
 }	t_table;
 
 /************************
@@ -85,7 +91,7 @@ void	is_die(t_table *table);
  *********************/
 
 /** File: handle_input.c */
-int	handle_arg(int argc, char *argv[], t_table *table);
+int		handle_arg(int argc, char *argv[], t_table *table);
 
 /********************
  * PATH: SRCS/UTILS *
@@ -103,9 +109,23 @@ size_t	get_curr_time(void);
 void	ph_usleep(t_table *table, size_t time_sleep);
 void	ph_print(t_philo *philo, int msg);
 
-/** File: utils_setup.c */
-void	ph_setlock_die(t_table *table ,int *die, pthread_mutex_t *mutex);
-void	ph_setlock_eat(t_table *table ,int *eat, pthread_mutex_t *mutex);
-void	ph_setunlock(pthread_mutex_t *mutex);
+/** File: utils_print.c */
+void	ph_print_fork(t_philo *philo);
+void	ph_print_sleep(t_philo *philo);
+void	ph_print_eat(t_philo *philo);
+void	ph_print_think(t_philo *philo);
+void	ph_print_dead(t_philo *philo);
+
+/** File: utils_setting_01.c */
+bool	ph_getting(pthread_mutex_t *mutex, bool *dead);
+void	ph_setting_dead(pthread_mutex_t *mutex, bool *dead, bool value);
+void	ph_setting_time(pthread_mutex_t *mutex, time_t *time, time_t value);
+
+/** File: utils_setting_02.c */
+void	ph_setting_meal(pthread_mutex_t *mutex, int *nb_meal, int value);
+int		ph_getting_meal(pthread_mutex_t *mutex, int *nb_meal);
+void	ph_setting_all_meal(pthread_mutex_t *mutex, int *all_eat, int value);
+int		ph_getting_all_meal(pthread_mutex_t *mutex, int *all_eat);
+time_t	ph_getting_time(pthread_mutex_t *mutex, time_t *time);
 
 #endif

@@ -1,0 +1,328 @@
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x4AA9140 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa9140 is 256 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x4AA9190 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa9190 is 336 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x1FFEFFFB28 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109674: init_table (srcs/handle/handle_input.c:38)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb28 is on thread #1's stack
+==681309==  in frame #1, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309==  Lock at 0x1FFEFFFB50 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109685: init_table (srcs/handle/handle_input.c:39)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb50 is on thread #1's stack
+==681309==  in frame #1, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during write of size 4 at 0x1FFEFFFB0C by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309== 
+==681309== This conflicts with a previous read of size 4 by thread #5
+==681309== Locks held: 4, at addresses 0x4AA9140 0x4AA9190 0x1FFEFFFB28 0x1FFEFFFB50
+==681309==    at 0x109D8A: ph_print (srcs/utils/utils_philo.c:87)
+==681309==    by 0x10A031: is_eat (srcs/algorithm/init_philo.c:34)
+==681309==    by 0x10A2A1: routine (srcs/algorithm/routine.c:26)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #1, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x4AA9050 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa9050 is 16 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x1FFEFFFB28 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109674: init_table (srcs/handle/handle_input.c:38)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb28 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during read of size 4 at 0x1FFEFFFB0C by thread #2
+==681309== Locks held: 2, at addresses 0x4AA9050 0x1FFEFFFB28
+==681309==    at 0x109D8A: ph_print (srcs/utils/utils_philo.c:87)
+==681309==    by 0x109F9F: is_eat (srcs/algorithm/init_philo.c:21)
+==681309==    by 0x10A2A1: routine (srcs/algorithm/routine.c:26)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous write of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x1FFEFFFB28 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109674: init_table (srcs/handle/handle_input.c:38)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb28 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during read of size 4 at 0x1FFEFFFB0C by thread #4
+==681309== Locks held: 1, at address 0x1FFEFFFB28
+==681309==    at 0x109D8A: ph_print (srcs/utils/utils_philo.c:87)
+==681309==    by 0x10A2CE: routine (srcs/algorithm/routine.c:29)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous write of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309== Possible data race during read of size 4 at 0x1FFEFFFB0C by thread #4
+==681309== Locks held: none
+==681309==    at 0x10A27D: routine (srcs/algorithm/routine.c:24)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous write of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x1FFEFFFB28 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109674: init_table (srcs/handle/handle_input.c:38)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb28 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during read of size 4 at 0x1FFEFFFB0C by thread #3
+==681309== Locks held: 1, at address 0x1FFEFFFB28
+==681309==    at 0x109D8A: ph_print (srcs/utils/utils_philo.c:87)
+==681309==    by 0x10A2AF: routine (srcs/algorithm/routine.c:27)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous write of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x4AA9050 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa9050 is 16 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x4AA90A0 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa90a0 is 96 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x1FFEFFFB28 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109674: init_table (srcs/handle/handle_input.c:38)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb28 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during read of size 4 at 0x1FFEFFFB0C by thread #2
+==681309== Locks held: 3, at addresses 0x4AA9050 0x4AA90A0 0x1FFEFFFB28
+==681309==    at 0x109D8A: ph_print (srcs/utils/utils_philo.c:87)
+==681309==    by 0x10A009: is_eat (srcs/algorithm/init_philo.c:31)
+==681309==    by 0x10A2A1: routine (srcs/algorithm/routine.c:26)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous write of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x4AA9050 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa9050 is 16 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x4AA90A0 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa90a0 is 96 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x1FFEFFFB50 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109685: init_table (srcs/handle/handle_input.c:39)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb50 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during write of size 4 at 0x4AA9044 by thread #2
+==681309== Locks held: 3, at addresses 0x4AA9050 0x4AA90A0 0x1FFEFFFB50
+==681309==    at 0x10A021: is_eat (srcs/algorithm/init_philo.c:33)
+==681309==    by 0x10A2A1: routine (srcs/algorithm/routine.c:26)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous read of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A1C8: is_die (srcs/algorithm/init_philo.c:64)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x4aa9044 is 4 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309== ----------------------------------------------------------------
+==681309== 
+==681309==  Lock at 0x4AA9050 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa9050 is 16 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x4AA90A0 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x10965E: init_table (srcs/handle/handle_input.c:36)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x4aa90a0 is 96 bytes inside a block of size 400 alloc'd
+==681309==    at 0x484A534: malloc (m_replacemalloc/vg_replace_malloc.c:442)
+==681309==    by 0x1094F2: init_table (srcs/handle/handle_input.c:21)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Block was alloc'd by thread #1
+==681309== 
+==681309==  Lock at 0x1FFEFFFB28 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109674: init_table (srcs/handle/handle_input.c:38)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb28 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309==  Lock at 0x1FFEFFFB50 was first observed
+==681309==    at 0x4852C18: pthread_mutex_init (hg_intercepts.c:0)
+==681309==    by 0x109685: init_table (srcs/handle/handle_input.c:39)
+==681309==    by 0x10941E: handle_arg (srcs/handle/handle_input.c:110)
+==681309==    by 0x10921F: main (srcs/philosopher.c:21)
+==681309==  Address 0x1ffefffb50 is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== Possible data race during read of size 4 at 0x1FFEFFFB0C by thread #2
+==681309== Locks held: 4, at addresses 0x4AA9050 0x4AA90A0 0x1FFEFFFB28 0x1FFEFFFB50
+==681309==    at 0x109D8A: ph_print (srcs/utils/utils_philo.c:87)
+==681309==    by 0x10A031: is_eat (srcs/algorithm/init_philo.c:34)
+==681309==    by 0x10A2A1: routine (srcs/algorithm/routine.c:26)
+==681309==    by 0x485BC26: mythread_wrapper (hg_intercepts.c:406)
+==681309==    by 0x4911AC2: start_thread (pthread_create.c:442)
+==681309==    by 0x49A2A03: clone (clone.S:100)
+==681309== 
+==681309== This conflicts with a previous write of size 4 by thread #1
+==681309== Locks held: none
+==681309==    at 0x10A20A: is_die (srcs/algorithm/init_philo.c:67)
+==681309==    by 0x10932F: main (srcs/philosopher.c:42)
+==681309==  Address 0x1ffefffb0c is on thread #1's stack
+==681309==  in frame #4, created by main (srcs/philosopher.c:16)
+==681309== 
+==681309== 
+==681309== Use --history-level=approx or =none to gain increased speed, at
+==681309== the cost of reduced accuracy of conflicting-access information
+==681309== For lists of detected and suppressed errors, rerun with: -s
+==681309== ERROR SUMMARY: 67 errors from 14 contexts (suppressed: 208280 from 67)

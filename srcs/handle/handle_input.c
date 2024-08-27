@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 14:19:59 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/07 12:07:32 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/27 20:47:37 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ static void	init_table(t_table *table)
 	}
 	pthread_mutex_init(&table->is_print, NULL);
 	pthread_mutex_init(&table->is_check, NULL);
+	pthread_mutex_init(&table->is_die_eat_all, NULL);
 }
 
 static int	check_valid(int argc, char *argv[])
