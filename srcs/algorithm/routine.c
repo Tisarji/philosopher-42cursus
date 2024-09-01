@@ -6,33 +6,31 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 19:09:40 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/28 04:31:46 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/29 04:15:30 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
 
-void	*routine(void *add)
+void	*routine(t_philo *philo)
 {
-	t_philo	*philo;
-	t_table	*table;
+	int	eat_count;
 
-	philo = (t_philo *)add;
-	table = philo->table;
-	if (philo->id % 2 == 0)
-		usleep(15000); // usleep(1000);
-	while (!ph_getting(&table->die_mutex, &table->die))
+	eat_count = 0;
+	if (!ph_action(philo, "is thinking"))
+		return (NULL);
+	while (1)
 	{
-		if (fork_routine(table, philo)) /** Create function for routine only fork! */
-			return (NULL);
-		sub_routine(table, philo); /** Support Routine For check */
-		if (third_checker(philo, table)) /**Create function for check routine it */
-			return (NULL);
-		ph_print_sleep(philo);
-		check_sleep(table); /** Check for sure this got sleep */
-		if (ph_getting(&philo->table->die_mutex, &philo->table->die))
-			return (NULL);
-		ph_print_think(philo);
+		if (self->num % 2)
+			ph_msleep(6);
+		if (!eat(philo, &eat_count))
+			break ;
+		if (!ph_action(philo, "is sleeping"))
+			break ;
+		ph_msleep(philo->table->time_sleep);
+		if (!ph_action(philo, "is thinking"))
+			break ;
+		ph_msleep(philo->table->time_eat - philo->table->time_sleep);
 	}
 	return (NULL);
 }

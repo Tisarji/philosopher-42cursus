@@ -6,64 +6,66 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:11:30 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/28 00:50:23 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/29 05:03:21 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
 
-void	is_eat(t_philo *philo)
+static int	init_table(t_table *table)
 {
-	t_table	*table;
-
-	table = philo->table;
-	pthread_mutex_lock(&philo->fork);
-	ph_print(philo, FORK);
-	if (philo->table->num_philo == 1)
+	if (pthread_mutex_init(&table->print_mutex, NULL))
+		return (1);
+	if (pthread_mutex_init(&opt->run_m, NULL))
+		return (pthread_mutex_destroy(&table->print_mutex), 1);
+	if (pthread_mutex_init(&opt->count_m, NULL))
 	{
-		ph_usleep(table, table->die);
-		ph_print(philo, DEAD);
-		pthread_mutex_unlock(&philo->fork);
-		table->die = 1;
-		return ;
+		pthread_mutex_destroy(&table->print_mutex);
+		pthread_mutex_destroy(&table->start_mutex);
+		return (1);
 	}
-	pthread_mutex_lock(&philo->r_fork->fork);
-	ph_print(philo, FORK);
-	pthread_mutex_lock(&table->is_check);
-	philo->meal_eat++;
-	ph_print(philo, EAT);
-	philo->last_eat = get_curr_time();
-	pthread_mutex_unlock(&table->is_check);
-	ph_usleep(table, table->time_eat);
-	pthread_mutex_unlock(&philo->fork);
-	pthread_mutex_unlock(&philo->r_fork->fork);
+	table->start = 1;
+	table->count_remain = 0;
+	return (0);
 }
 
-void	is_die(t_table *table)
+static int	ph_setup_philo(t_philo *philo, t_table *table)
 {
-	int	i;
+	int				i;
+	pthread_mutex_t	*prev;
 
-	while (!table->eat_all)
+	i = 0;
+	prev = NULL;
+	while (i < table->num_philo)
 	{
-		i = -1;
-		while (!table->die && ++i < table->num_philo)
+		philo[i].table = table;
+		philo[i].l_fork = prev;
+		philo[i].num = i + 1;
+		philo[i].last_eat = 0;
+		if (pthread_mutex_init(&philo[i].r_fork, NULL))
+			return (ph_resources_destroy(philo, i - 1, false), free(philo), 1);
+		if (pthread_mutex_init(&philo[i].last_eat_mutex, NULL))
 		{
-			pthread_mutex_lock(&table->is_check);
-			if (get_curr_time() - table->philo[i].last_eat > (size_t)table->time_die)
-			{
-				ph_print(&table->philo[i], DEAD);
-				table->die = 1;
-			}
-			pthread_mutex_unlock(&table->is_check);
-			usleep(100);
+			pthread_mutex_destroy(&tab[i].m_last_ate);
+			return (ph_resources_destroy(philo, i - 1, false), free(philo), 1);
 		}
-		if (table->die)
-			break ;
-		i = 0;
-		while (table->num_eat != -1 && i < table->num_philo && \
-			table->philo[i].meal_eat >= table->num_eat)
-			i++;
-		if (i == table->num_philo)
-			table->eat_all = 1;
+		prev = &tab[i].rfork;
+		i += 1;
 	}
+	philo[0].l_fork = prev;
+	return (0);
+}
+
+t_philo	*init_philos(t_table *table)
+{
+	t_philo	*philo;
+
+	if (init_table(table))
+		return (NULL);
+	philo = malloc(sizeof(t_philo) * table->num_philo);
+	if (!philo)
+		return (NULL);
+	if (ph_setup_philo(philo, table))
+		return (NULL);
+	return (philo);
 }

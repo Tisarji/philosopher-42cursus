@@ -6,52 +6,57 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/28 02:10:26 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/08/29 04:15:16 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/philosopher.h"
 
-void	ph_exit(t_table *table, pthread_t *thread)
+static long	ph_mstime(void)
 {
-	int	i;
+	struct timeval	tv;
 
-	i = -1;
-	while (++i < table->num_philo)
-		pthread_join(thread[i], NULL);
-	i = -1;
-	while (++i < table->num_philo)
-		pthread_mutex_destroy(&table->philo[i].fork);
-	pthread_mutex_destroy(&table->is_print);
-	pthread_mutex_destroy(&table->is_check);
-	free(table->philo);
-	free(thread);
+	gettimeofday(&tv, 0);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-size_t	get_curr_time(void)
+int	ph_action(t_philo *philo, const char *action)
 {
-	struct timeval	time;
+	suseconds_t	millisecond;
+	int			return_code;
 
-	gettimeofday(&time, NULL);
-	return (((time.tv_sec * 1000) + (time.tv_usec / 1000)));
-}
-
-void	ph_usleep(t_table *table, size_t time_sleep)
-{
-	size_t	time;
-
-	time = get_curr_time();
-	while (1)
+	return_code = 0;
+	pthread_mutex_lock(&philo->table->start_mutex);
+	if (philo->table->start)
 	{
-		pthread_mutex_lock(&table->is_die_eat_all);
-		if (table->die)
-		{
-			pthread_mutex_unlock(&table->is_die_eat_all);
-			break ;
-		}
-		pthread_mutex_unlock(&table->is_die_eat_all);
-		if (get_curr_time() - time >= time_sleep)
-			break ;
-		usleep(100);
+		millisecond = ph_get_timestamp(philo->table->start_millisecond);
+		pthread_mutex_lock(&philo->table->print_mutex);
+		printf("%ld %d %s\n", millisecond, philo->id, action);
+		pthread_mutex_unlock(&philo->table->print_mutex);
+		return_code = 1;
 	}
+	pthread_mutex_unlock(&philo->table->start_mutex);
+	return (return_code);
+}
+
+/** Note: About Time!
+ * suseconds_t	Milliseconds
+ * time_t		Seconds
+**/
+
+suseconds_t	ph_get_timestamp(suseconds_t milliseconds)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, 0);
+	return (tv.tv_usec / 1000 + tv.tv_sec * 1000 - milliseconds);
+}
+
+void	ph_msleep(int msec)
+{
+	long	limits;
+
+	limits = ph_mstime() + msec;
+	while (limits > ph_mstime())
+		usleep(500);
 }

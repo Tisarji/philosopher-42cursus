@@ -22,12 +22,16 @@ PATH_ERRORHANDLE = srcs/handle
 OBJ_DIR = objs
 
 ALGORITHM_SRC =		init_philo.c	\
+					monitor.c		\
+					ph_eat			\
 					routine.c
 
 ERRORHANDLE_SRC =	handle_input.c
 
 UTILS_SRC =			utils_libft.c	\
-					utils_philo.c
+					utils_philo.c	\
+					utils_destroy.c	\
+					utils_setup.c
 
 ALGORITHM_SRCS =	$(addprefix $(SRC_PATH)/algorithm/, $(ALGORITHM_SRC))
 ERRORHANDLE_SRCS = $(addprefix $(SRC_PATH)/handle/, $(ERRORHANDLE_SRC))

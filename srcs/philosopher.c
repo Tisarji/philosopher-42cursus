@@ -6,40 +6,24 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:03:00 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/06 14:49:37 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:18:30 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philosopher.h"
 
-int	main(int argc, char *argv[])
+int	main(int ac, char **av)
 {
-	int			i;
 	t_table		table;
-	pthread_t	*thread;
+	t_philo		*philo;
 
-	if ((argc < 5 || argc > 6) || handle_arg(argc, argv, &table))
+	if (handle_args(&table, ac, av))
 	{
-		printf("Usage: ./philo [Num Philo <= 5] [Die Time] [Eat Time] [Sleep Time] [Time Much Eat]\n");
-		return (EXIT_FAILURE);
+		printf("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+		return (1);
 	}
-	thread = (pthread_t *)malloc(table.num_philo * sizeof(pthread_t));
-	table.table_init = get_curr_time();
-	i = -1;
-	while (++i < table.num_philo)
-	{
-		if (pthread_create(&thread[i], NULL, &routine, &table.philo[i]))
-		{
-			printf("Error: Cannot Create");
-			free(table.philo);
-			free(thread);
-			return (EXIT_FAILURE);
-		}
-		pthread_mutex_lock(&table.is_check);
-		table.philo[i].last_eat = table.table_init;
-		pthread_mutex_unlock(&table.is_check);
-	}
-	is_die(&table);
-	ph_exit(&table, thread);
-	return (EXIT_SUCCESS);
+	philo = init_philos(&table);
+	if (!philo || start_simulation(philo))
+		return (write(2, "Memory error\n", 14), 1);
+	ph_cleanup(philo);
 }
