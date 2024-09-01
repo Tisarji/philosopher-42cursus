@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 19:09:40 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/29 04:15:30 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 23:00:09 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	*routine(t_philo *philo)
 		return (NULL);
 	while (1)
 	{
-		if (self->num % 2)
+		if (philo->id % 2)
 			ph_msleep(6);
-		if (!eat(philo, &eat_count))
+		if (!ph_eat(philo, &eat_count))
 			break ;
 		if (!ph_action(philo, "is sleeping"))
 			break ;

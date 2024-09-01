@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 04:36:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/29 04:59:01 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:53:50 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ph_destroy(t_table *table)
 {
 	pthread_mutex_destroy(&table->print_mutex);
 	pthread_mutex_destroy(&table->start_mutex);
-	pthread_mutex_destroy(&table->count_remain);
+	pthread_mutex_destroy(&table->count_mutex);
 }
 
 void	ph_resources_destroy(t_philo *philo, int num, bool thread)

@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 19:30:55 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/29 04:15:16 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:53:22 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ph_action(t_philo *philo, const char *action)
 	pthread_mutex_lock(&philo->table->start_mutex);
 	if (philo->table->start)
 	{
-		millisecond = ph_get_timestamp(philo->table->start_millisecond);
+		millisecond = ph_get_timestamp(philo->table->start_milliseconds);
 		pthread_mutex_lock(&philo->table->print_mutex);
 		printf("%ld %d %s\n", millisecond, philo->id, action);
 		pthread_mutex_unlock(&philo->table->print_mutex);

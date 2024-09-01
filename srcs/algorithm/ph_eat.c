@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 04:16:45 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/29 04:25:29 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 22:59:27 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ static int	left_fork_lock(t_philo *philo)
 
 static int	ph_finish_eat(t_philo *philo, int *eat_count)
 {
-	qmutex_set(&philo->last_eat_mutex, &philo->last_eat, ph_get_timestamp(philo->table->start_milliseconds));
+	ph_setting(&philo->last_eat_mutex, &philo->last_eat, ph_get_timestamp(philo->table->start_milliseconds));
 	*eat_count += 1;
-	if (*eat_count == philo->table->it)
+	if (*eat_count == philo->table->must_time_eat)
 	{
 		pthread_mutex_lock(&philo->table->count_mutex);
 		philo->table->count_remain += 1;
@@ -72,9 +72,9 @@ int	ph_eat(t_philo *philo, int *eat_count)
 {
 	int	tmp;
 
-	if (philo->num % 2 && !right_fork_lock(philo))
+	if (philo->id % 2 && !right_fork_lock(philo))
 		return (0);
-	else if (philo->num % 2 == 0 && !left_fork_lock(philo))
+	else if (philo->id % 2 == 0 && !left_fork_lock(philo))
 		return (0);
 	if (ph_action(philo, "is eating"))
 		tmp = ph_finish_eat(philo, eat_count);

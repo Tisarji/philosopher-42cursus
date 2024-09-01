@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 15:11:30 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/08/29 05:03:21 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 21:56:37 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static int	init_table(t_table *table)
 {
 	if (pthread_mutex_init(&table->print_mutex, NULL))
 		return (1);
-	if (pthread_mutex_init(&opt->run_m, NULL))
+	if (pthread_mutex_init(&table->start_mutex, NULL))
 		return (pthread_mutex_destroy(&table->print_mutex), 1);
-	if (pthread_mutex_init(&opt->count_m, NULL))
+	if (pthread_mutex_init(&table->count_mutex, NULL))
 	{
 		pthread_mutex_destroy(&table->print_mutex);
 		pthread_mutex_destroy(&table->start_mutex);
@@ -40,16 +40,16 @@ static int	ph_setup_philo(t_philo *philo, t_table *table)
 	{
 		philo[i].table = table;
 		philo[i].l_fork = prev;
-		philo[i].num = i + 1;
+		philo[i].id = i + 1;
 		philo[i].last_eat = 0;
 		if (pthread_mutex_init(&philo[i].r_fork, NULL))
 			return (ph_resources_destroy(philo, i - 1, false), free(philo), 1);
 		if (pthread_mutex_init(&philo[i].last_eat_mutex, NULL))
 		{
-			pthread_mutex_destroy(&tab[i].m_last_ate);
+			pthread_mutex_destroy(&philo[i].last_eat_mutex);
 			return (ph_resources_destroy(philo, i - 1, false), free(philo), 1);
 		}
-		prev = &tab[i].rfork;
+		prev = &philo[i].r_fork;
 		i += 1;
 	}
 	philo[0].l_fork = prev;

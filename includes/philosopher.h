@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 13:15:57 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/09/01 21:18:34 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/01 23:00:31 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ typedef struct s_philo {
  * PATH: SRCS/ALGORITHM *
  ************************/
 
+/** File: routine.c */
+void		*routine(t_philo *philo);
+
 /** File: init_philo.c */
 t_philo		*init_philos(t_table *table);
 
@@ -66,6 +69,9 @@ int			start_simulation(t_philo *philo);
 
 /** File: handle_input.c */
 int			handle_arg(t_table *table, int ac, char **av);
+
+/** File: ph_eat.c */
+int			ph_eat(t_philo *philo, int *eat_count);
 
 /*******************
  * PATH:SRCS/UTILS *

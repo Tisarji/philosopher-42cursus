@@ -10,8 +10,8 @@ NAME = philo
 RM = rm -rf
 
 PATH_HEADER = includes
-# CFLAGS = -Wall -Werror -Wextra -pthread -g -I $(PATH_HEADER)
-CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
+CFLAGS = -Wall -Werror -Wextra -pthread -g -I $(PATH_HEADER)
+# CFLAGS = -Wall -Werror -Wextra -pthread -g -fsanitize=thread -I $(PATH_HEADER)
 # CFLAGS = -pthread -g -fsanitize=thread -I $(PATH_HEADER)
 
 PATH_SRCS = srcs
@@ -23,7 +23,7 @@ OBJ_DIR = objs
 
 ALGORITHM_SRC =		init_philo.c	\
 					monitor.c		\
-					ph_eat			\
+					ph_eat.c		\
 					routine.c
 
 ERRORHANDLE_SRC =	handle_input.c
