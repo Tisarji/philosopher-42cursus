@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 03:11:29 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/09/01 23:08:27 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/03 22:54:07 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	report_death(t_philo *philo)
 	pthread_mutex_lock(&philo->table->start_mutex);
 	pthread_mutex_lock(&philo->table->print_mutex);
 	philo->table->start = 0;
-	printf("%ld %d died\n", ph_get_timestamp(philo->table->start), philo->id);
+	printf("%ld %d died\n", ph_get_timestamp(philo->table->start_milliseconds), philo->id);
 	pthread_mutex_unlock(&philo->table->print_mutex);
 	pthread_mutex_unlock(&philo->table->start_mutex);
 }
@@ -28,7 +28,7 @@ static int	detect_death(t_philo *philo)
 	int			return_code;
 
 	pthread_mutex_lock(&philo->last_eat_mutex);
-	ts = ph_get_timestamp(philo->table->start);
+	ts = ph_get_timestamp(philo->table->start_milliseconds);
 	if (ts - philo->table->time_die >= philo->last_eat)
 		return_code = 1;
 	else
@@ -75,7 +75,7 @@ int	start_simulation(t_philo *philo)
 		printf("Error gettingtimeofday\n");
 		return (1);
 	}
-	philo->table->start_milliseconds = tv.tv_sec * 1000 + tv.tv_usec / 1000;
+	philo->table->start_milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	while (i < table->num_philo)
 	{
 		if (pthread_create(&philo[i].thread, NULL,(void *(*)(void *))routine, &philo[i]))
