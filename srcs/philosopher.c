@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/11 16:03:00 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/09/01 23:01:08 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:46:15 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	main(int ac, char **av)
 
 	if (handle_arg(&table, ac, av))
 	{
-		printf("Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n");
+		printf("\tUsage: ./philo num_philo | time die | ");
+		printf ("time eat | time sleep | Much time to eat\n");
 		return (1);
 	}
 	philo = init_philos(&table);

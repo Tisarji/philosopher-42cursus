@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 03:11:29 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/09/03 22:54:07 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:49:33 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	report_death(t_philo *philo)
 	pthread_mutex_lock(&philo->table->start_mutex);
 	pthread_mutex_lock(&philo->table->print_mutex);
 	philo->table->start = 0;
-	printf("%ld %d died\n", ph_get_timestamp(philo->table->start_milliseconds), philo->id);
+	printf("%ld %d died\n", ph_get_timestamp(philo->table->start_milliseconds), \
+		philo->id);
 	pthread_mutex_unlock(&philo->table->print_mutex);
 	pthread_mutex_unlock(&philo->table->start_mutex);
 }
@@ -51,7 +52,8 @@ void	monitor_philosophers(t_philo *philo)
 				report_death(philo + i);
 				return ;
 			}
-			if (ph_getting(&philo->table->count_mutex, &philo->table->count_remain) == philo->table->num_philo)
+			if (ph_getting(&philo->table->count_mutex, \
+				&philo->table->count_remain) == philo->table->num_philo)
 			{
 				ph_setting(&philo->table->start_mutex, &philo->table->start, 0);
 				return ;
@@ -78,7 +80,8 @@ int	start_simulation(t_philo *philo)
 	philo->table->start_milliseconds = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	while (i < table->num_philo)
 	{
-		if (pthread_create(&philo[i].thread, NULL,(void *(*)(void *))routine, &philo[i]))
+		if (pthread_create(&philo[i].thread, NULL, \
+			(void *(*)(void *))routine, &philo[i]))
 		{
 			ph_resources_destroy(philo, i - 1, true);
 			ph_setting(&table->start_mutex, &table->start, -1);

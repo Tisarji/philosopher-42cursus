@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 04:16:45 by jikarunw          #+#    #+#             */
-/*   Updated: 2024/09/01 22:59:27 by jikarunw         ###   ########.fr       */
+/*   Updated: 2024/09/04 12:48:28 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int	left_fork_lock(t_philo *philo)
 
 static int	ph_finish_eat(t_philo *philo, int *eat_count)
 {
-	ph_setting(&philo->last_eat_mutex, &philo->last_eat, ph_get_timestamp(philo->table->start_milliseconds));
+	ph_setting(&philo->last_eat_mutex, &philo->last_eat, \
+		ph_get_timestamp(philo->table->start_milliseconds));
 	*eat_count += 1;
 	if (*eat_count == philo->table->must_time_eat)
 	{
